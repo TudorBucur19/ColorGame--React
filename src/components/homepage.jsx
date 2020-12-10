@@ -6,14 +6,16 @@ import Header from './header'
 const Home = () => {
   const [squares, setSquares] = useState([]);
   const [difficulty, setDifficulty] = useState(6);
-
-  console.log(squares);
-
-
+  const [pickedColor, setPickedColor] = useState();
+  
+  
+  
   const randomColors = () => {
     const newColors = new Array(difficulty).fill();
-    const colors = newColors.map(el => randomColor());
-    setSquares(colors);
+    const colors = newColors.map((el, index) => randomColor());
+    let random = Math.floor(Math.random() * difficulty);
+    setSquares(colors);    
+    setPickedColor(colors[random]);
   };
 
   const easy = () => {
@@ -24,21 +26,21 @@ const Home = () => {
     setDifficulty(6);
   }
 
-  const pickedColor = () => {
-    let random = Math.floor(Math.random() * difficulty);
-    return squares[random];
-  };
-
-  // console.log(squares, pickedColor());
-
+  const checkColor = (i) => {
+      if(pickedColor === squares[i]){
+      return pickedColor;
+    } else {
+      return "none";
+    }
+  }
   
   return (
       <div>
-        <Header pickedColor={pickedColor()}/>
+        <Header pickedColor={pickedColor}/>
         <Stripe updateColors={randomColors} easy={easy} hard={hard}/>
         <div className="container">
           {squares.map(sq => 
-            <Square color={sq} />)}
+            <Square color={sq} checkColor={checkColor()} />)}
         </div>
       </div>
     );

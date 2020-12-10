@@ -2,7 +2,7 @@ import React from 'react';
 import './header.styles.css';
 
 const Header = ({pickedColor}) => {
-    console.log(pickedColor);
+    
     return(
         <div>
             <h1>The great
