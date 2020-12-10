@@ -1,0 +1,37 @@
+.stripe {
+	background: white;
+	height: 30px;
+	text-align: center;
+	color: black;
+} 
+
+.message {
+	display: inline-block;
+	width: 20%;
+	font-size: inherit;
+	color: rgb(243, 9, 9);
+	font-family: "Avenir";
+	font-weight: 600;
+}
+
+
+
+button {
+	background: none;
+	border: none;
+	height: 100%;
+	text-transform: uppercase;
+	color: rgb(243, 9, 9);
+	font-weight: 700;
+	letter-spacing: 1px;
+	font-size: inherit;
+	transition: 0.5s;
+	-webkit-transition: 0.5s;
+	-moz-transition: 0.5s;
+	outline: none;
+}
+
+button:hover {
+	color: white;
+	background: rgb(222, 238, 7);
+}
