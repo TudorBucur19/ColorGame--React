@@ -18,6 +18,17 @@ const Home = () => {
     setPickedColor(colors[random]);
   };
 
+  console.log(squares);
+
+  const checkColor = (i) => {
+    if(squares[i] === pickedColor){
+      console.log(pickedColor)
+    }else{
+     let backGr = "none";
+     return backGr;
+    }
+  }
+
   const easy = () => {
     setDifficulty(3);
   }
@@ -26,21 +37,14 @@ const Home = () => {
     setDifficulty(6);
   }
 
-  const checkColor = (i) => {
-      if(pickedColor === squares[i]){
-      return pickedColor;
-    } else {
-      return "none";
-    }
-  }
-  
+      
   return (
       <div>
         <Header pickedColor={pickedColor}/>
         <Stripe updateColors={randomColors} easy={easy} hard={hard}/>
         <div className="container">
-          {squares.map(sq => 
-            <Square color={sq} checkColor={checkColor()} />)}
+          {squares.map((sq, index) => 
+            <Square key={index} color={sq} checkColor={() => checkColor(index)} bg={()=>checkColor()} />)}
         </div>
       </div>
     );
