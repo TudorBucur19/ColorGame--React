@@ -42,7 +42,7 @@ const Home = () => {
       setHeaderBg(pickedColor);
       setPlayBtn("Play again!");
     }else{
-      squaresCopy[i] = "rgb(6, 211, 85)" ; //to be fixed
+      squaresCopy[i] = "" ;
       setSquares(squaresCopy);
       setMessage("Keep Trying");
     }

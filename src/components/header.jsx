@@ -7,7 +7,7 @@ const Header = ({pickedColor, backgroundColor}) => {
         <div style={{background: backgroundColor}}>
             <h1>The great
                 <br/>
-                <span>{pickedColor}</span>
+                <span><b>{pickedColor}</b></span>
                 <br/>
                 Color game
             </h1>
