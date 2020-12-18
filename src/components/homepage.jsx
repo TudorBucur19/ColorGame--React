@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Stripe from './stripe';
 import Square from './square';
-import Header from './header'
+import Header from './header';
+import ScoreKeeper from './score';
 
 const Home = () => {
   const [squares, setSquares] = useState([]);
@@ -10,7 +11,11 @@ const Home = () => {
   const [message, setMessage] = useState("");
   const [headerBg, setHeaderBg] = useState("rgb(127, 252, 3)");
   const [playBtn, setPlayBtn] = useState("New colors");
-  
+  const [currentSc, setCurrentSc] = useState(0);
+  const [scHistory, setScHistory] = useState([]);
+  const [highSc, setHighSc] = useState(0);
+  const [isPlaiyng, setIsPlaying] = useState(true);
+    
   
   
   const randomColors = () => {
@@ -22,6 +27,7 @@ const Home = () => {
     setMessage("");
     setPlayBtn("New colors")
     setHeaderBg("rgb(127, 252, 3)");
+    setIsPlaying(true);
   };
 
   useEffect(()=>{
@@ -31,38 +37,65 @@ const Home = () => {
     setPickedColor(colors[random]);
     setSquares(colors);
     
-  }, [difficulty])
+  }, [difficulty]);
   
   const checkColor = (i) => {
-   let squaresCopy = [...squares]
-    if(squares[i] === pickedColor){
-      const correctColor = new Array(difficulty).fill(pickedColor);
-      setSquares(correctColor);
-      setMessage("Correct");
-      setHeaderBg(pickedColor);
-      setPlayBtn("Play again!");
-    }else{
-      squaresCopy[i] = "" ;
-      setSquares(squaresCopy);
-      setMessage("Keep Trying");
+    if(isPlaiyng){
+      let squaresCopy = [...squares]
+   
+      if(squares[i] === pickedColor){
+        const correctColor = new Array(difficulty).fill(pickedColor);
+        let scores = scHistory.push(currentSc)
+        let min = Math.min(...scHistory);
+        setSquares(correctColor);
+        setMessage("Correct");
+        setHeaderBg(pickedColor);
+        setPlayBtn("Play again!");
+        setCurrentSc(0);
+        setHighSc(min);
+        setIsPlaying(false);
+      }else{
+        let score = currentSc +1;
+        squaresCopy[i] = "" ;
+        setSquares(squaresCopy);
+        setMessage("Keep Trying");
+        setCurrentSc(score);
+      }
     }
+   
   }
 
     
   const easy = () => {
     setDifficulty(3);
+    setScHistory([]);
+    setHighSc(0);
+    setIsPlaying(true);
     
   }
 
   const hard = () => {
     setDifficulty(6);
+    setScHistory([]);
+    setHighSc(0);
+    setIsPlaying(true);
   }
 
       
   return (
       <div>
-        <Header pickedColor={pickedColor} backgroundColor={headerBg}/>
-        <Stripe updateColors={randomColors} easy={easy} hard={hard} message={message} playBtn={playBtn}/>
+        <Header 
+        pickedColor={pickedColor} 
+        backgroundColor={headerBg}
+        />
+        <Stripe 
+        updateColors={randomColors} 
+        easy={easy} 
+        hard={hard} 
+        message={message} 
+        playBtn={playBtn}
+        />
+        
         <div className="container">
           {squares.map((sq, index) => 
             <Square 
@@ -71,6 +104,9 @@ const Home = () => {
             checkColor={()=> checkColor(index)}
             />)}
         </div>
+        <ScoreKeeper 
+        currentSc={currentSc} 
+        highScore={highSc}/>
       </div>
     );
   }

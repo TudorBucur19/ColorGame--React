@@ -1,0 +1,30 @@
+.scoreContainer {
+    border: 2px solid red;
+    background: rgb(243, 9, 9);
+    border-radius: 15%;
+    position: absolute;
+    max-width: 12%;
+    float: right;
+    padding: 1%;
+    margin: 1%;
+    text-align: center;
+}
+
+.scoreContainer:after {
+    content: "";
+    display: block;
+    padding-bottom: 12%;
+  }
+
+h2, h3, span {
+    font-family: "Avenir";
+    color: white;
+}
+
+span {
+    font-size: 24px;
+}
+
+.score {
+    margin-bottom: 15px;
+}
