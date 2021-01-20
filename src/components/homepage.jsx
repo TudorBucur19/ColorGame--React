@@ -65,23 +65,15 @@ const Home = () => {
    
   }
 
-    
-  const easy = () => {
-    setDifficulty(3);
+    const changeDifficulty = (numSquares) => {
+    setDifficulty(numSquares);
     setScHistory([]);
     setHighSc(0);
     setIsPlaying(true);
     
   }
 
-  const hard = () => {
-    setDifficulty(6);
-    setScHistory([]);
-    setHighSc(0);
-    setIsPlaying(true);
-  }
-
-      
+    
   return (
       <div>
         <Header 
@@ -90,8 +82,7 @@ const Home = () => {
         />
         <Stripe 
         updateColors={randomColors} 
-        easy={easy} 
-        hard={hard} 
+        changeDifficulty={changeDifficulty}         
         message={message} 
         playBtn={playBtn}
         />
