@@ -35,3 +35,9 @@ button:hover {
 	color: white;
 	background: rgb(222, 238, 7);
 }
+
+.instructions {
+	float: left;
+	margin-right: -180px;
+	margin-left: 1%;
+}

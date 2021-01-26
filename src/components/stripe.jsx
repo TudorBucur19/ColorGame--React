@@ -1,9 +1,10 @@
 import React from 'react';
 import './stripe.styles.css';
 
-const Stripe = ({updateColors, message, playBtn, changeDifficulty}) => {
+const Stripe = ({updateColors, message, playBtn, changeDifficulty, toggleModal}) => {
     return (
         <div className="stripe">
+            <button className="instructions" onClick={toggleModal}>Instructions</button>
             <button className="reset" onClick={updateColors}>{playBtn}</button>
             <span className="message">{message}</span>
             <button className="easyBtn" onClick={() => changeDifficulty(3)}>Easy</button>

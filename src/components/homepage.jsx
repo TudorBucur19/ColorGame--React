@@ -3,6 +3,7 @@ import Stripe from './stripe';
 import Square from './square';
 import Header from './header';
 import ScoreKeeper from './score';
+import Instructions from './instructionsModal';
 
 const Home = () => {
   const [squares, setSquares] = useState([]);
@@ -15,7 +16,11 @@ const Home = () => {
   const [scHistory, setScHistory] = useState([]);
   const [highSc, setHighSc] = useState(0);
   const [isPlaiyng, setIsPlaying] = useState(true);
-    
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }  
   
   
   const randomColors = () => {
@@ -85,6 +90,7 @@ const Home = () => {
         changeDifficulty={changeDifficulty}         
         message={message} 
         playBtn={playBtn}
+        toggleModal={toggleModal}
         />
         
         <div className="container">
@@ -98,6 +104,10 @@ const Home = () => {
         <ScoreKeeper 
         currentSc={currentSc} 
         highScore={highSc}/>
+        <Instructions
+        toggleModal={toggleModal}
+        isOpen={isOpen}
+        />
       </div>
     );
   }
